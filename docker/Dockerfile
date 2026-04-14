@@ -24,6 +24,9 @@ WORKDIR /home/nameres/configuration
 COPY --from=builder --chown=nameres:nameres /build/nameres/src/nameres/config/config.default.json /home/nameres/configuration
 COPY --from=builder --chown=nameres:nameres /build/nameres/version.txt /home/nameres/configuration/version.txt
 
+# Override with corrected configuration for Kubernetes cluster
+COPY --chown=nameres:nameres configuration/config.json /home/nameres/configuration/config.json
+
 COPY --chown=nameres:nameres configuration/supervisord.conf /etc/supervisor/supervisord.conf
 COPY --chown=nameres:nameres configuration/Caddyfile /etc/caddy/Caddyfile
 
